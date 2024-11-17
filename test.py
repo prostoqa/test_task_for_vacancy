@@ -1,20 +1,12 @@
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
+from pages.main_page import MainPage
 
 link = "https://mega.readyscript.ru/"
 
 
-def test_show_planshet_digma(driver):
-    driver.get(link)
-    catalog = driver.find_element(By.XPATH, '//span[text()="Каталог"]')
-    catalog.click()
-    elektronika = driver.find_element(By.XPATH, '//div[contains(@class, "head-dropdown-catalog")]'
-                                                '/a[contains(@href, "/catalog/elektronika/")]')
-    ActionChains(driver).move_to_element(elektronika).perform()
-    planshety = driver.find_element(By.XPATH, '//div[contains(@class, "head-dropdown-catalog")]'
-                                              '/a[contains(@href, "/catalog/planshety/")]')
-    ActionChains(driver).move_to_element(planshety).perform()
-    digma = driver.find_element(By.XPATH, '//a[contains(@href, "/catalog/digma/")]')
-    ActionChains(driver).move_to_element(digma).click(digma).perform()
-    item = driver.find_element(By.XPATH, '//a[contains(@class, "item-card__title")]')
-    assert "Digma" in item.text, f"По фильтру Digma отображается {item.text}"
+def test_show_tablet_digma(driver):
+    main = MainPage(driver)
+    main.open_link(link)
+    main.choose_digma_tablet()
+    item_name = main.get_item_name()
+    assert "Digma" in item_name, f"По фильтру Digma отображается {item_name}"
+    #ToDo: add title digma and path
