@@ -5,13 +5,13 @@ from pages.base_page import BasePage
 
 class MainPage(BasePage):
 
-    CATALOG = (By.XPATH, '//span[text()="Каталог"]')
-    ELECTRONICS = (By.XPATH, '//div[contains(@class, "head-dropdown-catalog")]'
-                                      '/a[contains(@href, "/catalog/elektronika/")]')
-    TABLETS = (By.XPATH, '//div[contains(@class, "head-dropdown-catalog")]'
-                                    '/a[contains(@href, "/catalog/planshety/")]')
-    DIGMA = (By.XPATH, '//a[contains(@href, "/catalog/digma/")]')
-    ITEM = (By.XPATH, '//a[contains(@class, "item-card__title")]')
+    CATALOG = (By.CSS_SELECTOR, '.head-catalog-btn')
+    ELECTRONICS = (By.CSS_SELECTOR, '.head-dropdown-catalog [href="/catalog/elektronika/"]')
+    TABLETS = (By.CSS_SELECTOR, '.head-dropdown-catalog [href="/catalog/planshety/"]')
+    DIGMA = (By.CSS_SELECTOR, '.head-dropdown-catalog [href="/catalog/digma/"]')
+    ITEM = (By.CSS_SELECTOR, '.item-card__title')
+    TITLE = (By.CSS_SELECTOR, '.row h1')
+    BREADCRUMB_DIGMA = (By.CSS_SELECTOR, '.breadcrumb [href="/catalog/digma/"]')
 
     def choose_digma_tablet(self):
         self.click_element(self.CATALOG)
@@ -20,5 +20,10 @@ class MainPage(BasePage):
         self.hover_over_element_and_click(self.DIGMA)
 
     def get_item_name(self):
-        item = self.get_element(self.ITEM)
-        return item.text
+        return self.get_element(self.ITEM).text
+
+    def get_title_name(self):
+        return self.get_element(self.TITLE).text
+
+    def check_breadcrumb_digma(self):
+        return self.is_element_present(self.BREADCRUMB_DIGMA)

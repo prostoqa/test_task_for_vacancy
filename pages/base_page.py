@@ -1,3 +1,4 @@
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 
 
@@ -22,3 +23,10 @@ class BasePage:
     def hover_over_element_and_click(self, locator):
         element = self.get_element(locator)
         ActionChains(self.driver).move_to_element(element).click(element).perform()
+
+    def is_element_present(self, locator):
+        try:
+            self.get_element(locator)
+        except NoSuchElementException:
+            return False
+        return True
