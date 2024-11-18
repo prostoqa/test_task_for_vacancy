@@ -26,12 +26,10 @@ class CartPage(BasePage):
                 self.get_element(self.MODAL_WINDOW_CART_AMOUNT).get_attribute("value"))
 
     def modal_window_close(self):
-        self.click_element(self.MODAL_WINDOW_CLOSE)
-
-    def go_to_cart_from_modal_window(self):
-        self.click_element(self.MODAL_WINDOW_GO_TO_CART)
+        self.hover_over_element_and_click(self.MODAL_WINDOW_CLOSE)
 
     def check_cart_page(self):
+        self.wait_presence_of_element(self.CART_TITLE)
         return (self.get_element_text(self.CART_TITLE), self.get_element_text(self.CART_ITEM_NAME),
                 self.get_element_text(self.CART_TOTAL_PRICE),
                 self.get_element(self.CART_ITEMS_AMOUNT).get_attribute("value"))
