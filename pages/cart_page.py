@@ -10,6 +10,7 @@ class CartPage(BasePage):
     MODAL_WINDOW_CART_AMOUNT = (By.CSS_SELECTOR, '.cart-amount__input input')
     MODAL_WINDOW_ITEM_PRICE = (By.CSS_SELECTOR, '.modal-cart-item__price')
     MODAL_WINDOW_GO_TO_CART = (By.CSS_SELECTOR, '[href="/cart/"].btn')
+    MODAL_WINDOW_CLOSE = (By.CSS_SELECTOR, '.modal-close')
 
     CART_TITLE = (By.CSS_SELECTOR, '.cartCheckout  h2')
     CART_EMPTY = (By.TAG_NAME, 'h2')
@@ -23,6 +24,9 @@ class CartPage(BasePage):
         self.wait_presence_of_element(self.MODAL_WINDOW_TITLE)
         return (self.get_element_text(self.MODAL_WINDOW_ITEM), self.get_element_text(self.MODAL_WINDOW_ITEM_PRICE),
                 self.get_element(self.MODAL_WINDOW_CART_AMOUNT).get_attribute("value"))
+
+    def modal_window_close(self):
+        self.click_element(self.MODAL_WINDOW_CLOSE)
 
     def go_to_cart_from_modal_window(self):
         self.click_element(self.MODAL_WINDOW_GO_TO_CART)

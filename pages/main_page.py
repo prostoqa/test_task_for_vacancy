@@ -20,7 +20,7 @@ class MainPage(BasePage):
     AUTH = (By.CSS_SELECTOR, '.dropdown-item[href*="auth"]')
     LOGIN_USER = (By.LINK_TEXT, 'Иван Иванов')
 
-    CART = (By.CSS_SELECTOR, '.cart__empty-text')
+    CART = (By.CSS_SELECTOR, '.cart')
     ITEMS_COUNT_ON_CART = (By.CSS_SELECTOR, '#rs-cart .rs-cart-items-count')
     PRICE_ON_CART = (By.CSS_SELECTOR, '#rs-cart .rs-cart-items-price')
 
@@ -53,7 +53,12 @@ class MainPage(BasePage):
         self.hover_over_element(self.ITEM_ADD)
         self.click_element(self.ITEM_ADD)
 
-    def get_items_and_price_on_cart(self):
+    def get_items_and_price_on_empty_cart(self):
+        self.wait_presence_of_element(self.CART)
+        return self.get_element_text(self.ITEMS_COUNT_ON_CART), self.get_element_text(self.PRICE_ON_CART)
+
+    def get_amount_and_price_on_cart_with_item(self):
+        self.hover_over_element(self.CART)
         return self.get_element_text(self.ITEMS_COUNT_ON_CART), self.get_element_text(self.PRICE_ON_CART)
 
     def go_to_cart_from_main_page(self):
