@@ -1,12 +1,10 @@
-from pages.main_page import MainPage
 from pages.favorite_page import FavoritePage
-
-link = "https://mega.readyscript.ru/"
+from pages.main_page import MainPage
 
 
 def test_add_item_to_favorite_and_delete(driver):
     main = MainPage(driver)
-    main.open_link(link)
+    main.open_link()
     item_name = main.get_item_name()
     main.add_item_to_favorite()
     assert main.get_amount_on_favorite_icon() == "1", "Doesn't have amount 1 on favorite icon after adding the item"

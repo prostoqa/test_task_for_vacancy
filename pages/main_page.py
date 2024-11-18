@@ -54,8 +54,7 @@ class MainPage(BasePage):
         return self.get_element_text(self.ITEM_PRICE)
 
     def add_item_to_cart(self):
-        self.hover_over_element(self.ITEM_ADD_TO_CART)
-        self.click_element(self.ITEM_ADD_TO_CART)
+        self.hover_over_element_and_click(self.ITEM_ADD_TO_CART)
 
     def get_items_and_price_on_empty_cart(self):
         self.hover_over_element(self.CART)

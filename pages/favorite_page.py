@@ -17,8 +17,7 @@ class FavoritePage(BasePage):
         return self.get_element_text(self.FAVORITE_ITEM_NAME)
 
     def delete_item_from_favorite(self):
-        self.hover_over_element(self.FAVORITE_ICON_ON_ITEM)
-        self.click_element(self.FAVORITE_ICON_ON_ITEM)
+        self.hover_over_element_and_click(self.FAVORITE_ICON_ON_ITEM)
 
     def get_empty_favorite(self):
         self.wait_presence_of_element(self.FAVORITE_EMPTY)

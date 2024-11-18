@@ -1,14 +1,12 @@
-from pages.main_page import MainPage
 from pages.cart_page import CartPage
-
-link = "https://mega.readyscript.ru/"
+from pages.main_page import MainPage
 
 
 def test_add_item_to_cart_and_delete(driver):
     # I made one test exactly according to the task, but I think it should be split into different tests,
     # and additional checks could be added
     main = MainPage(driver)
-    main.open_link(link)
+    main.open_link()
     item_name = main.get_item_name()
     item_price = main.get_item_price() + " р."
     main.add_item_to_cart()

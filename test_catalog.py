@@ -1,11 +1,9 @@
 from pages.main_page import MainPage
 
-link = "https://mega.readyscript.ru/"
-
 
 def test_show_tablet_digma(driver):
     main = MainPage(driver)
-    main.open_link(link)
+    main.open_link()
     main.choose_digma_tablet()
     item_name = main.get_item_name()
     title_name = main.get_title_name()
