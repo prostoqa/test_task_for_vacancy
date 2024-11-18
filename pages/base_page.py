@@ -15,6 +15,9 @@ class BasePage:
     def get_element(self, locator):
         return self.driver.find_element(*locator)
 
+    def get_element_text(self, locator):
+        return self.get_element(locator).text
+
     def click_element(self, locator):
         self.get_element(locator).click()
 
