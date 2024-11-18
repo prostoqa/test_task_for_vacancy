@@ -1,5 +1,7 @@
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 class BasePage:
@@ -28,5 +30,18 @@ class BasePage:
         try:
             self.get_element(locator)
         except NoSuchElementException:
+            return False
+        return True
+
+    def clear_textfield(self, locator):
+        self.get_element(locator).clear()
+
+    def enter_text(self, locator, text):
+        self.get_element(locator).send_keys(text)
+
+    def wait_presence_of_element(self, locator, timeout=3):
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+        except TimeoutException:
             return False
         return True

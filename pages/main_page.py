@@ -13,6 +13,10 @@ class MainPage(BasePage):
     TITLE = (By.CSS_SELECTOR, '.row h1')
     BREADCRUMB_DIGMA = (By.CSS_SELECTOR, '.breadcrumb [href="/catalog/digma/"]')
 
+    PERSONAL_ACCOUNT = (By.LINK_TEXT, 'Личный кабинет')
+    AUTH = (By.CSS_SELECTOR, '.dropdown-item[href*="auth"]')
+    LOGIN_USER = (By.LINK_TEXT, 'Иван Иванов')
+
     def choose_digma_tablet(self):
         self.click_element(self.CATALOG)
         self.hover_over_element(self.ELECTRONICS)
@@ -27,3 +31,10 @@ class MainPage(BasePage):
 
     def check_breadcrumb_digma(self):
         return self.is_element_present(self.BREADCRUMB_DIGMA)
+
+    def go_to_personal_account_to_login(self):
+        self.click_element(self.PERSONAL_ACCOUNT)
+        self.click_element(self.AUTH)
+
+    def check_successful_login(self):
+        return self.wait_presence_of_element(self.LOGIN_USER)
