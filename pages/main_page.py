@@ -17,9 +17,8 @@ class MainPage(BasePage):
     ITEM_ADD_TO_CART = (By.CSS_SELECTOR, '.item-product-cart-action button')
     ITEM_ADD_TO_FAVORITE = (By.CSS_SELECTOR, '.rs-favorite')
 
-    PERSONAL_ACCOUNT = (By.LINK_TEXT, 'Личный кабинет')
+    PERSONAL_ACCOUNT = (By.CSS_SELECTOR, '.head-bar__link[data-bs-toggle="dropdown"] span')
     AUTH = (By.CSS_SELECTOR, '.dropdown-item[href*="auth"]')
-    LOGIN_USER = (By.LINK_TEXT, 'Иван Иванов')
 
     CART = (By.CSS_SELECTOR, '.cart')
     ITEMS_COUNT_ON_CART = (By.CSS_SELECTOR, '#rs-cart .rs-cart-items-count')
@@ -48,7 +47,8 @@ class MainPage(BasePage):
         self.click_element(self.AUTH)
 
     def check_successful_login(self):
-        return self.wait_presence_of_element(self.LOGIN_USER)
+        self.hover_over_element(self.PERSONAL_ACCOUNT)
+        return self.get_element_text(self.PERSONAL_ACCOUNT)
 
     def get_item_price(self):
         return self.get_element_text(self.ITEM_PRICE)
@@ -65,12 +65,10 @@ class MainPage(BasePage):
         return self.get_element_text(self.ITEMS_COUNT_ON_CART), self.get_element_text(self.PRICE_ON_CART)
 
     def go_to_cart_from_main_page(self):
-        self.hover_over_element(self.CART)
-        self.click_element(self.CART)
+        self.hover_over_element_and_click(self.CART)
 
     def add_item_to_favorite(self):
-        self.hover_over_element(self.ITEM_ADD_TO_FAVORITE)
-        self.click_element(self.ITEM_ADD_TO_FAVORITE)
+        self.hover_over_element_and_click(self.ITEM_ADD_TO_FAVORITE)
 
     def get_amount_on_favorite_icon(self):
         self.hover_over_element(self.FAVORITE)
